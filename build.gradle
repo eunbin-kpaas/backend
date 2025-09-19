@@ -1,0 +1,28 @@
+//// build.gradle (Groovy)
+//plugins {
+//    id 'io.spring.dependency-management' version '1.1.7'
+//    id 'java'
+//    // id 'org.springframework.boot' version '3.3.3' apply false  // 서비스 모듈에서만 적용
+//}
+//
+//allprojects {
+//    group = 'com.localtrip'
+//    version = '0.0.1-SNAPSHOT'
+//    repositories { mavenCentral() }
+//}
+//
+//subprojects {
+//    apply plugin: 'io.spring.dependency-management'
+//    apply plugin: 'java'
+//
+//    // Boot BOM을 모든 모듈에 적용 (라이브러리 모듈까지 버전 정합)
+//    dependencyManagement {
+//        imports {
+//            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+//        }
+//    }
+//
+//    test {
+//        useJUnitPlatform()
+//    }
+//}

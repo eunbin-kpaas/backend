@@ -1,0 +1,12 @@
+// settings.gradle.kts
+rootProject.name = "localtrip"
+include(
+        "localtrip-auth-core",
+        "localtrip-common",
+        "localtrip-external-clients",
+        "localtrip-member-service",
+        "localtrip-region-service",
+        "localtrip-place-service",
+        "localtrip-planner-service",
+        "localtrip-web-starter"
+)

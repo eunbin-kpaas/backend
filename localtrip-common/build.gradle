@@ -26,10 +26,20 @@ dependencyManagement {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation('org.springframework.boot:spring-boot-autoconfigure')
+	compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+	
+	api('org.slf4j:slf4j-api')
+	api('com.fasterxml.jackson.core:jackson-databind')
+	api('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+	
+	// 공통 예외 처리, 유틸리티
+	api('org.apache.commons:commons-lang3')
+	api('org.springframework:spring-context')
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	api("org.slf4j:slf4j-api:2.0.13")
-	implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2") // JsonUtil용 (선택)
 }
 
 tasks.named('test') {

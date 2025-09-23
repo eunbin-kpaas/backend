@@ -25,12 +25,17 @@ dependencyManagement {
 }
 
 dependencies {
-	api(project(":localtrip-common"))
+	api(project(":localtrip-common"))  // 개별 빌드 시 주석 처리
 
 	api("org.springframework.boot:spring-boot-starter-web")
 	api("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-autoconfigure")
 	compileOnly("org.springframework.boot:spring-boot-configuration-processor")
+	
+	// localtrip-common에서 제공하던 의존성들을 직접 추가
+	api('org.slf4j:slf4j-api')
+	api('com.fasterxml.jackson.core:jackson-databind')
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

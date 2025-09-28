@@ -1,8 +1,8 @@
 package com.localtrip.member.controller;
 
 import com.localtrip.web.dto.BaseResponse;
-import com.localtrip.member.dto.request.LoginRequest;
-import com.localtrip.member.dto.response.LoginResponse;
+import com.localtrip.member.dto.request.*;
+import com.localtrip.member.dto.response.*;
 import com.localtrip.member.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,5 +44,54 @@ public class MemberController {
         response.addCookie(refreshTokenCookie);
         
         return BaseResponse.success(loginResult.getResponse());
+    }
+    
+    /**
+     * 아이디 중복 확인
+     */
+    @PostMapping("/check-id")
+    public BaseResponse<CheckIdResponse> checkId(@Valid @RequestBody CheckIdRequest checkIdRequest) {
+        log.debug("아이디 중복 확인 요청: memberId={}", checkIdRequest.getMemberId());
+        
+        CheckIdResponse response = memberService.checkIdDuplicated(checkIdRequest.getMemberId());
+        
+        return BaseResponse.success(response);
+    }
+    
+    /**
+     * 이메일 인증코드 발송
+     */
+    @PostMapping("/send-verification")
+    public BaseResponse<SendVerificationResponse> sendVerification(@Valid @RequestBody SendVerificationRequest sendVerificationRequest) {
+        log.debug("이메일 인증코드 발송 요청: email={}", sendVerificationRequest.getEmail());
+        
+        SendVerificationResponse response = memberService.sendVerificationCode(sendVerificationRequest);
+        
+        return BaseResponse.success(response);
+    }
+    
+    /**
+     * 이메일 인증코드 확인
+     */
+    @PostMapping("/verify-email")
+    public BaseResponse<Void> verifyEmail(@Valid @RequestBody VerifyEmailRequest verifyEmailRequest) {
+        log.debug("이메일 인증코드 확인 요청: email={}", verifyEmailRequest.getEmail());
+        
+        memberService.verifyEmail(verifyEmailRequest);
+        
+        return BaseResponse.success();
+    }
+    
+    /**
+     * 회원가입
+     */
+    @PostMapping("/signup")
+    public BaseResponse<SignupResponse> signup(@Valid @RequestBody SignupRequest signupRequest) {
+        log.debug("회원가입 요청: memberId={}, email={}", 
+                signupRequest.getMemberId(), signupRequest.getEmail());
+        
+        SignupResponse response = memberService.signup(signupRequest);
+        
+        return BaseResponse.success(response);
     }
 }

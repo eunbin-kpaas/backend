@@ -38,16 +38,20 @@ public final class CommonConstants {
     // 정규식 패턴
     public static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     public static final String PHONE_REGEX = "^010-\\d{4}-\\d{4}$";
-    public static final String USER_ID_REGEX = "^[A-Za-z0-9]{6,20}$";
+    public static final String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$";
     
-    // 인증 관련
-    public static final int EMAIL_VERIFICATION_EXPIRE_MINUTES = 5;
-    public static final int PASSWORD_RESET_EXPIRE_MINUTES = 30;
-    public static final int JWT_ACCESS_TOKEN_EXPIRE_HOURS = 2;
-    public static final int JWT_REFRESH_TOKEN_EXPIRE_DAYS = 14;
+    // 캐시 관련
+    public static final int CACHE_DEFAULT_TTL = 3600; // 1시간
+    public static final int CACHE_SHORT_TTL = 300;    // 5분
+    public static final int CACHE_LONG_TTL = 86400;   // 24시간
     
-    // 외부 API 관련
-    public static final int KAKAO_API_TIMEOUT_MS = 5000;
-    public static final int GOOGLE_API_TIMEOUT_MS = 5000;
-    public static final int EXTERNAL_API_RATE_LIMIT_PER_MINUTE = 1000;
+    // HTTP 헤더
+    public static final String HEADER_REQUEST_ID = "X-Request-ID";
+    public static final String HEADER_USER_AGENT = "User-Agent";
+    public static final String HEADER_CONTENT_TYPE = "Content-Type";
+    
+    // 날짜 포맷
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String TIME_FORMAT = "HH:mm";
 }

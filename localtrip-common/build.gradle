@@ -27,12 +27,19 @@ dependencyManagement {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation('org.springframework.boot:spring-boot-autoconfigure')
 	compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 	
 	api('org.slf4j:slf4j-api')
 	api('com.fasterxml.jackson.core:jackson-databind')
 	api('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+	
+	// Servlet API (HttpServletRequest 사용)
+	api('jakarta.servlet:jakarta.servlet-api')
+	
+	// Spring Web (ServerHttpRequest 사용)
+	api('org.springframework:spring-web')
 	
 	// 공통 예외 처리, 유틸리티
 	api('org.apache.commons:commons-lang3')

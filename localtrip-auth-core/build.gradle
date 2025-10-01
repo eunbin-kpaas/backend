@@ -15,7 +15,12 @@ java {
 	}
 }
 
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -27,11 +32,16 @@ dependencyManagement {
 
 dependencies {
 
-	api(project(":localtrip-common"))
+	api('com.localtrip:localtrip-common:0.0.1-SNAPSHOT')
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation("org.springframework.boot:spring-boot-autoconfigure")
 	compileOnly("org.springframework.boot:spring-boot-configuration-processor")
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

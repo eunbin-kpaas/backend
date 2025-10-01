@@ -15,6 +15,14 @@ java {
 	}
 }
 
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+	options.encoding = 'UTF-8'
+}
+
 repositories {
 	mavenCentral()
 }
@@ -45,6 +53,10 @@ dependencies {
 	// 공통 예외 처리, 유틸리티
 	api('org.apache.commons:commons-lang3')
 	api('org.springframework:spring-context')
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

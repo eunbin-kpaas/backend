@@ -31,8 +31,8 @@ public class TravelBasketController {
     public ResponseEntity<TravelBasketResponse> getBasketItems(
             @AuthenticationPrincipal AuthenticatedUser user) {
         
-        log.info("여행바구니 조회 요청: memberId={}", user.getId());
-        TravelBasketResponse response = basketService.getBasketItems(user.getId());
+        log.info("여행바구니 조회 요청: memberId={}", user.getUserId());
+        TravelBasketResponse response = basketService.getBasketItems(Long.parseLong(user.getUserId()));
         return ResponseEntity.ok(response);
     }
     
@@ -48,9 +48,9 @@ public class TravelBasketController {
             @Valid @RequestBody AddBasketItemRequest request) {
         
         log.info("여행바구니 아이템 추가 요청: memberId={}, region={}, place={}", 
-                user.getId(), request.getRegion(), request.getPlaceName());
+                user.getUserId(), request.getRegion(), request.getPlaceName());
         
-        basketService.addBasketItem(user.getId(), request);
+        basketService.addBasketItem(Long.parseLong(user.getUserId()), request);
         return ResponseEntity.ok().build();
     }
     
@@ -65,8 +65,8 @@ public class TravelBasketController {
             @AuthenticationPrincipal AuthenticatedUser user,
             @PathVariable Long itemId) {
         
-        log.info("여행바구니 아이템 삭제 요청: memberId={}, itemId={}", user.getId(), itemId);
-        basketService.deleteBasketItem(user.getId(), itemId);
+        log.info("여행바구니 아이템 삭제 요청: memberId={}, itemId={}", user.getUserId(), itemId);
+        basketService.deleteBasketItem(Long.parseLong(user.getUserId()), itemId);
         return ResponseEntity.ok().build();
     }
 }

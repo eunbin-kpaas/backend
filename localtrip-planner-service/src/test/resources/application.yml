@@ -1,0 +1,28 @@
+spring:
+  # 테스트용 MySQL 데이터베이스 설정
+  datasource:
+    url: jdbc:mysql://localhost:3306/localtrip_planner?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: create  # 테스트 시작 시 테이블 재생성
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+# Gateway Authentication 설정
+gateway:
+  auth:
+    token: ""  # 테스트 환경에서는 비활성화
+
+# 로깅 설정
+logging:
+  level:
+    com.localtrip.planner: WARN
+    org.springframework: WARN
+    org.hibernate: WARN

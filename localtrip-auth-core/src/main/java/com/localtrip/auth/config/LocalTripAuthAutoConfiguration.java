@@ -24,16 +24,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class LocalTripAuthAutoConfiguration {
     
     @Bean
-    public AuthenticationEntryPointImpl authenticationEntryPoint() {
-        return new AuthenticationEntryPointImpl();
-    }
-    
-    @Bean
-    public AccessDeniedHandlerImpl accessDeniedHandler() {
-        return new AccessDeniedHandlerImpl();
-    }
-    
-    @Bean
     public GatewayAuthenticationFilter gatewayAuthenticationFilter(AuthProps authProps) {
         return new GatewayAuthenticationFilter(authProps.getGatewayToken());
     }

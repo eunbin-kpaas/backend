@@ -33,7 +33,6 @@ public class EmailService {
     /**
      * 이메일 인증코드 발송
      */
-    @Async
     public void sendVerificationCode(String email) {
         try {
             // 1. 6자리 인증코드 생성
@@ -116,11 +115,11 @@ public class EmailService {
      */
     private String buildVerificationEmailContent(String verificationCode) {
         return String.format(
-            "안녕하세요, LocalTrip입니다.\\n\\n" +
-            "회원가입을 위한 이메일 인증코드입니다.\\n\\n" +
-            "인증코드: %s\\n\\n" +
-            "이 코드는 %d분 후에 만료됩니다.\\n" +
-            "인증코드를 입력하여 이메일 인증을 완료해주세요.\\n\\n" +
+            "안녕하세요, LocalTrip입니다.\n\n" +
+            "회원가입을 위한 이메일 인증코드입니다.\n\n" +
+            "인증코드: %s\n\n" +
+            "이 코드는 %d분 후에 만료됩니다.\n" +
+            "인증코드를 입력하여 이메일 인증을 완료해주세요.\n\n" +
             "감사합니다.",
             verificationCode,
             mailProperties.getExpiryMinutes()

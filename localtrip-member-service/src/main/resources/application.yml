@@ -15,7 +15,7 @@ spring:
   # JPA 설정
   jpa:
     hibernate:
-      ddl-auto: create  # 테이블 자동 생성
+      ddl-auto: update  # 테이블 자동 생성
     show-sql: true
     properties:
       hibernate:
@@ -43,6 +43,7 @@ spring:
     password: sfmr bdjg wvjp skph
     properties:
       mail:
+        debug: true
         smtp:
           auth: true
           starttls:
@@ -56,7 +57,7 @@ localtrip:
   # Auth Core 설정
   auth:
     enabled: true
-    gateway-token: dev-gateway-token
+    gateway-token: ""
     public-paths:
       - "/api/members/check-id"
       - "/api/members/send-verification"
@@ -66,6 +67,7 @@ localtrip:
       - "/actuator/health"
       - "/swagger-ui/**"
       - "/v3/api-docs/**"
+      - "/error"
     admin-paths:
       - "/actuator/**"
       
@@ -97,5 +99,11 @@ logging:
   level:
     com.localtrip: DEBUG
     org.springframework.security: DEBUG
+    org.springframework.mail: DEBUG
+    com.sun.mail: DEBUG
+    jakarta.mail: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  charset:
+    console: UTF-8
+    file: UTF-8

@@ -17,7 +17,8 @@ public class AuthProps {
         "/health",
         "/api/public/**",
         "/swagger-ui/**",
-        "/v3/api-docs/**"
+        "/v3/api-docs/**",
+        "/error"
     };
     
     /** 관리자 전용 경로 */

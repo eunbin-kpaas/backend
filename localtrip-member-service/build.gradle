@@ -22,13 +22,14 @@ configurations {
 
 repositories {
 	mavenCentral()
+	mavenLocal()  // 로컬 Maven 저장소 추가
 }
 
 dependencies {
-	// LocalTrip 라이브러리들
-	implementation project(':localtrip-common')      // ErrorCode, LogUtil, RedisUtil 등
-	implementation project(':localtrip-web-starter') // 로깅, CORS, 예외처리
-	implementation project(':localtrip-auth-core')   // Spring Security, 인증/인가
+	// LocalTrip 라이브러리들 (Maven 좌표로 변경)
+	implementation 'com.localtrip:localtrip-common:0.0.1-SNAPSHOT'
+	implementation 'com.localtrip:localtrip-web-starter:0.0.1-SNAPSHOT'
+	implementation 'com.localtrip:localtrip-auth-core:0.0.1-SNAPSHOT'
 	
 	// Spring Boot Starters
 	implementation 'org.springframework.boot:spring-boot-starter-web'

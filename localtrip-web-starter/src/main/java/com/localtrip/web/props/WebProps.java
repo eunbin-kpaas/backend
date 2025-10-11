@@ -16,7 +16,10 @@ public class WebProps {
     private boolean logRequestBody = false;
     private int maxBodySizeBytes = 2048;
     private String[] excludePatterns = {"/actuator/**", "/health", "/static/**"};
-
+    
+    // 글로벌 로깅 설정
+    private boolean globalLoggingEnabled = true;
+    
     // Getters and Setters
     public boolean isRequestLoggingEnabled() {
         return requestLoggingEnabled;
@@ -56,5 +59,13 @@ public class WebProps {
     
     public void setExcludePatterns(String[] excludePatterns) {
         this.excludePatterns = excludePatterns;
+    }
+    
+    public boolean isGlobalLoggingEnabled() {
+        return globalLoggingEnabled;
+    }
+    
+    public void setGlobalLoggingEnabled(boolean globalLoggingEnabled) {
+        this.globalLoggingEnabled = globalLoggingEnabled;
     }
 }

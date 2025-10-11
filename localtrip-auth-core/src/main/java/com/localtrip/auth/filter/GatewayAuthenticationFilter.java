@@ -48,6 +48,10 @@ public class GatewayAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, 
                                   FilterChain filterChain) throws ServletException, IOException {
         
+        System.out.println("=== GatewayAuthenticationFilter 시작 ===");
+        System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("Request Method: " + request.getMethod());
+        
         try {
             // Gateway 토큰 검증 (설정된 경우)
             if (requireGatewayToken && !isValidGatewayRequest(request)) {
@@ -57,6 +61,7 @@ public class GatewayAuthenticationFilter extends OncePerRequestFilter {
             
             // 사용자 정보 헤더 추출
             String userId = request.getHeader(HEADER_USER_ID);
+            System.out.println("User ID from header: " + userId);
             
             if (StringUtils.hasText(userId)) {
                 // 인증된 사용자 정보가 있는 경우
@@ -69,10 +74,12 @@ public class GatewayAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 
                 log.debug("Authenticated user: {} with roles: {}", user.getUsername(), user.getRoles());
+                System.out.println("User authenticated: " + user.getUsername());
             } else {
                 // 인증되지 않은 요청 (public 엔드포인트)
                 SecurityContextHolder.clearContext();
                 log.debug("No user authentication found in headers");
+                System.out.println("No authentication headers found - treating as public request");
             }
             
         } catch (Exception e) {
@@ -86,6 +93,7 @@ public class GatewayAuthenticationFilter extends OncePerRequestFilter {
             throw new BusinessLogicException(GlobalErrorCode.AUTH_INTERNAL);
         }
         
+        System.out.println("=== GatewayAuthenticationFilter 완료 ===");
         filterChain.doFilter(request, response);
     }
     

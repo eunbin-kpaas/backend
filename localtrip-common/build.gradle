@@ -1,5 +1,6 @@
 plugins {
 	id 'java-library'
+	id 'maven-publish'
 	id 'org.springframework.boot' version '3.5.5' apply false
 	id 'io.spring.dependency-management' version '1.1.7'
 }
@@ -12,6 +13,14 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+	options.encoding = 'UTF-8'
 }
 
 repositories {
@@ -27,6 +36,7 @@ dependencyManagement {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation('org.springframework.boot:spring-boot-autoconfigure')
 	compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 	
@@ -34,9 +44,19 @@ dependencies {
 	api('com.fasterxml.jackson.core:jackson-databind')
 	api('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 	
+	// Servlet API (HttpServletRequest 사용)
+	api('jakarta.servlet:jakarta.servlet-api')
+	
+	// Spring Web (ServerHttpRequest 사용)
+	api('org.springframework:spring-web')
+	
 	// 공통 예외 처리, 유틸리티
 	api('org.apache.commons:commons-lang3')
 	api('org.springframework:spring-context')
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -44,4 +64,28 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			from components.java
+//
+//			// Gradle metadata 생성 비활성화
+//			suppressAllPomMetadataWarnings()
+			versionMapping {
+				usage('java-api') {
+					fromResolutionOf('runtimeClasspath')
+				}
+				usage('java-runtime') {
+					fromResolutionResult()
+				}
+			}
+		}
+	}
+	
+	// 의존성 버전 경고 비활성화
+//	tasks.withType(GenerateModuleMetadata) {
+//		enabled = false
+//	}
 }

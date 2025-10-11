@@ -22,26 +22,43 @@ configurations {
 
 repositories {
 	mavenCentral()
+	mavenLocal()  // 로컬 Maven 저장소 추가
 }
 
 dependencies {
-	implementation(project(":localtrip-auth-core"))
+	// LocalTrip 라이브러리들 (Maven 좌표로 변경)
+	implementation 'com.localtrip:localtrip-common:0.0.1-SNAPSHOT'
+	implementation 'com.localtrip:localtrip-web-starter:0.0.1-SNAPSHOT'
+	implementation 'com.localtrip:localtrip-auth-core:0.0.1-SNAPSHOT'
+	
+	// Spring Boot Starters
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-
-	// 비밀번호 인코딩 등
-	implementation("org.springframework.security:spring-security-crypto")
-
-	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-security'  // Security 추가
+	
+	// Database
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	
+	// JWT 처리
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	
+	// Password Encoding
+	implementation 'org.springframework.security:spring-security-crypto'
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'com.h2database:h2'  // 테스트용 인메모리 DB
+	testImplementation 'it.ozimov:embedded-redis:0.7.3'  // 테스트용 임베디드 Redis
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
